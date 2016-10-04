@@ -19,7 +19,7 @@ au BufWrite /private/etc/pw.* set nowritebackup nobackup
 set number
 syntax on
 set autoindent
-set noexpandtab
+set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
