@@ -74,4 +74,7 @@ autocmd ColorScheme * highlight Comment ctermfg=3 guifg=#cb8500
 colorscheme molokai
 "colorscheme badwolf
 
+"----Automatic start setting of plugin----
+autocmd VimEnter * execute 'NERDTree'
+
 
