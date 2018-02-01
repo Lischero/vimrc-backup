@@ -1,0 +1,136 @@
+# ヘッダの設定                                                                  
+proxy_redirect                          off;
+proxy_set_header Host                   $host;
+proxy_set_header X-Real-IP              $remote_addr;
+proxy_set_header X-Forwarded-Proto      $scheme;
+proxy_set_header X-Forwarded-Host       $host;
+proxy_set_header X-Forwarded-Server     $host;
+proxy_set_header X-Forwarded-For        $proxy_add_x_forwarded_for;
+
+## タイムアウトの設定                                                            
+proxy_connect_timeout 60;
+proxy_read_timeout    90;
+proxy_send_timeout    60;
+
+## バッファサイズの設定                                                          
+proxy_buffering  on;
+proxy_buffer_size       8k;
+proxy_buffers           100 8k;
+
+proxy_cache_valid     200 2h;
+proxy_cache_valid     302 2h;
+proxy_cache_valid     301 4h;
+proxy_cache_valid     any 1m;
+
+
+server {
+    # nginx server setting
+
+    access_log /usr/local/etc/nginx/log/bottle_localhost_access.log;
+    error_log /usr/local/etc/nginx/log/bottle_localhost_error.log;
+
+    listen 443;
+    server_name _;
+
+    ssl on;
+    ssl_certificate /usr/local/etc/openssl/certs/test_key_ip/ca-ip-crt.crt;
+    ssl_certificate_key /usr/local/etc/openssl/certs/test_key_ip/ca-ip-privatekey.key;
+    #ssl_certificate /usr/local/etc/openssl/certs/test_key_localhost/localhost-crt.crt;
+    #ssl_certificate_key /usr/local/etc/openssl/certs/test_key_localhost/localhost-privatekey.key;
+
+    location / {
+        # For return_file_server.py
+        proxy_pass http://localhost:8080;
+        proxy_redirect http:// https://;
+    }
+
+    location /websocket1 {
+        # reverse proxy setting
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_http_version 1.1;
+        # transform header when redirect (when nginx https <- uwsgi http) 
+        proxy_redirect http:// https://;
+        proxy_pass http://localhost:8081;
+    }
+
+    location /websocket2 {
+        # reverse proxy setting
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_http_version 1.1;
+        # transform header when redirect (when nginx https <- uwsgi http) 
+        proxy_redirect http:// https://;
+        proxy_pass http://localhost:8082;
+    }
+
+    location /websocket3 {
+        # reverse proxy setting
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_http_version 1.1;
+        # transform header when redirect (when nginx https <- uwsgi http) 
+        proxy_redirect http:// https://;
+        proxy_pass http://localhost:8083;
+    }
+
+    location /websocket4 {
+        # reverse proxy setting
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_http_version 1.1;
+        # transform header when redirect (when nginx https <- uwsgi http) 
+        proxy_redirect http:// https://;
+        proxy_pass http://localhost:8084;
+    }
+
+    location /websocket5 {
+        # reverse proxy setting
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_http_version 1.1;
+        # transform header when redirect (when nginx https <- uwsgi http) 
+        proxy_redirect http:// https://;
+        proxy_pass http://localhost:8085;
+    }
+
+    location /websocket6 {
+        # reverse proxy setting
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_http_version 1.1;
+        # transform header when redirect (when nginx https <- uwsgi http) 
+        proxy_redirect http:// https://;
+        proxy_pass http://localhost:8086;
+    }
+    location /websocket7 {
+        # reverse proxy setting
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_http_version 1.1;
+        # transform header when redirect (when nginx https <- uwsgi http) 
+        proxy_redirect http:// https://;
+        proxy_pass http://localhost:8087;
+    }
+
+    location /websocket8 {
+        # reverse proxy setting
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_http_version 1.1;
+        # transform header when redirect (when nginx https <- uwsgi http) 
+        proxy_redirect http:// https://;
+        proxy_pass http://localhost:8088;
+    }
+
+    location /websocket9 {
+        # reverse proxy setting
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_http_version 1.1;
+        # transform header when redirect (when nginx https <- uwsgi http) 
+        proxy_redirect http:// https://;
+        proxy_pass http://localhost:8089;
+    }
+}
+
